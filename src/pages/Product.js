@@ -37,7 +37,7 @@ const Product = () => {
     }
     db.transaction(
       (tx) => {
-        tx.executeSql("insert into products (code, name) values (0, ?)", [code,name]);
+        tx.executeSql("insert into products (code, name) values (?, ?)", [code,name]);
         setCode(null)
         setName(null)
         console.log('click add', name, code)
