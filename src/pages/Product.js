@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Container from '../components/Container';
 import { Title } from '../components/Title';
 import { Input } from '../components/Input';
-import PressableButton from '../components/Button';
+import {PressableButton} from '../components/PressableButton';
 import * as SQLite from "expo-sqlite";
 function openDatabase() {
   if (Platform.OS === "web") {

@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-  width: 100%;
-  height: 300px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
 `
 
-const BarcodeScanner = ({ scanned, handleBarCodeScanned }) => {
+const BarcodeScanner = ({ handleBarCodeScanned }) => {
   const [hasPermission, setHasPermission] = useState(null);
 
   useEffect(() => {
@@ -21,7 +24,7 @@ const BarcodeScanner = ({ scanned, handleBarCodeScanned }) => {
   return (
     <Container>
       <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={handleBarCodeScanned}
         style={{ width: '100%', height: '100%' }}
       />
     </Container>

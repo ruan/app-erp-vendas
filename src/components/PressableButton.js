@@ -13,9 +13,8 @@ const ButtonText = styled.Text`
   text-align: center;
   color: white;
 `;
-const PressableButton = ({ onPress, title }) => (
+export const PressableButton = ({ onPress, title }) => (
   <ButtonContainer onPress={onPress} >
     <ButtonText>{title}</ButtonText>
   </ButtonContainer>
 );
-export default PressableButton;

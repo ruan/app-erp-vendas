@@ -16,10 +16,10 @@ const InputTitle = styled.Text`
   margin-bottom: 10px;
 `
 
-const Input = ({placeholder = '', value, onChangeText}) => (
+const Input = ({ placeholder = '', value, onChangeText, keyboardType="default"}) => (
   <>
     <InputTitle>{placeholder}</InputTitle>
-    <TextInput value={value} onChangeText={onChangeText}></TextInput>
+    <TextInput keyboardType={keyboardType} value={value} onChangeText={onChangeText}></TextInput>
   </>
 )
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import PressableButton from '../components/Button';
+import {PressableButton} from '../components/PressableButton';
 import Container from '../components/Container';
 import { useNavigation } from '@react-navigation/core';
 const Home = () => {
