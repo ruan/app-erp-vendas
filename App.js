@@ -13,11 +13,11 @@ export default function App() {
   return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Home'>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Products" component={Products} />
-          <Stack.Screen name="Product" component={Product} />
-          <Stack.Screen name="Sales" component={Sales} />
-          <Stack.Screen name="Sell" component={Sell} />
+          <Stack.Screen name="Inicio" component={Home} />
+          <Stack.Screen name="Produtos" component={Products} />
+          <Stack.Screen name="Cadastrar produto" component={Product} />
+          <Stack.Screen name="Histórico de vendas" component={Sales} />
+          <Stack.Screen name="Carrinho" component={Sell} />
         </Stack.Navigator>
       </NavigationContainer>
   );

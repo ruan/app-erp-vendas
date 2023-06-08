@@ -82,7 +82,6 @@ const Sell = () => {
   return (
     <>
       <Container>
-        <Title>Venda</Title>
         <Cart items={cart} onAddProduct={handleAddProduct} onDoneSell={handleDoneSell} paymentMethod={paymentMethod} onChangePaymentMethod={onChangePaymentMethod}></Cart>
       </Container>
       <ModalInput visible={showModal}>

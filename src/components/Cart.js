@@ -1,8 +1,6 @@
 import styled from 'styled-components/native';
 import { PressableButton } from './PressableButton';
-import { ModalInput } from './ModalInput';
 import DropdownSelect from 'react-native-input-select';
-import { useState } from 'react';
 
 const FlatList = styled.FlatList`
   border-radius: 10px;
@@ -24,7 +22,7 @@ const Text = styled.Text`
 
 const Header = () => (
   <Item>
-    <Text>Nome</Text>
+    <Text>Produto</Text>
     <Text>Quantidade</Text>
   </Item>
 )

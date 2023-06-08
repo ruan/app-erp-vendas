@@ -30,7 +30,6 @@ const Product = () => {
 
   return (
     <Container>
-      <Title>Cadastrar Produto</Title>
       <Input placeholder='Nome' value={name} onChangeText={(text) => setName(text)} />
       <Input placeholder='Código' keyboardType='number-pad' value={code} onChangeText={(text) => setCode(text)} />
       <Input placeholder='Preço' keyboardType='decimal-pad' value={price} onChangeText={(text) => setPrice(text)} />

@@ -33,7 +33,6 @@ const Products = () => {
 
   return (
     <Container>
-      <Title>Produtos</Title>
       <ListProducts
         items={products}
       ></ListProducts>

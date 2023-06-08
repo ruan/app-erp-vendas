@@ -9,10 +9,10 @@ const Home = () => {
   }
   return (
     <Container>
-      <PressableButton onPress={() => goTo('Products')} title='Produtos'></PressableButton>
-      <PressableButton onPress={() => goTo('Product')} title='Cadastrar Produto'></PressableButton>
-      <PressableButton onPress={() => goTo('Sales')} title='Vendas do Mês'></PressableButton>
-      <PressableButton onPress={() => goTo('Sell')} title='Vender'></PressableButton>
+      <PressableButton onPress={() => goTo('Produtos')} title='Produtos'></PressableButton>
+      <PressableButton onPress={() => goTo('Cadastrar produto')} title='Cadastrar Produto'></PressableButton>
+      <PressableButton onPress={() => goTo('Histórico de vendas')} title='Histórico de vendas'></PressableButton>
+      <PressableButton onPress={() => goTo('Carrinho')} title='Vender'></PressableButton>
     </Container>
   )
 }

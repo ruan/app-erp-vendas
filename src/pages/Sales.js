@@ -22,7 +22,6 @@ const Sales = () => {
   },[])
   return (
     <Container>
-      <Title>Lista de vendas</Title>
       <ListSales items={sales}></ListSales>
     </Container>
   )
