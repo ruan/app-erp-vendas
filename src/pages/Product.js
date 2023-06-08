@@ -3,49 +3,28 @@ import Container from '../components/Container';
 import { Title } from '../components/Title';
 import { Input } from '../components/Input';
 import {PressableButton} from '../components/PressableButton';
-import * as SQLite from "expo-sqlite";
-function openDatabase() {
-  if (Platform.OS === "web") {
-    return {
-      transaction: () => {
-        return {
-          executeSql: () => { },
-        };
-      },
-    };
-  }
-
-  const db = SQLite.openDatabase("db.db");
-  return db;
-}
-
-const db = openDatabase();
+import database from '../database';
 const Product = () => {
   const [name, setName] = useState(null);
   const [code, setCode] = useState(null);
-  useEffect(() => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        "create table if not exists products (id integer primary key not null, code int, name text);"
-      );
-    });
-  }, []);
+  const [price, setPrice] = useState(null);
 
-  const add = ({name, code}) => {
-    if (!name || !code) {
+  const add = ({name, code, price}) => {
+    if (!name || !code || !price) {
       return false;
     }
-    db.transaction(
+    database.transaction(
       (tx) => {
-        tx.executeSql("insert into products (code, name) values (?, ?)", [code,name]);
+        tx.executeSql("insert into products (code, name, price) values (?, ?, ?)", [code, name, price.replace(',','.')]);
         setCode(null)
         setName(null)
-        console.log('click add', name, code)
+        setPrice(null)
+        console.log('click add', name, code, price)
         tx.executeSql("select * from products", [], (_, { rows }) =>
-          console.log(JSON.stringify(rows))
+          console.log('list',JSON.stringify(rows))
         );
       },
-      null
+      (error => console.log(error))
     );
   };
 
@@ -53,8 +32,9 @@ const Product = () => {
     <Container>
       <Title>Cadastrar Produto</Title>
       <Input placeholder='Nome' value={name} onChangeText={(text) => setName(text)} />
-      <Input placeholder='Código' value={code} onChangeText={(text) => setCode(text)} />
-      <PressableButton title={'Salvar'} onPress={() => add({name, code})}></PressableButton>
+      <Input placeholder='Código' keyboardType='number-pad' value={code} onChangeText={(text) => setCode(text)} />
+      <Input placeholder='Preço' keyboardType='decimal-pad' value={price} onChangeText={(text) => setPrice(text)} />
+      <PressableButton title={'Salvar'} onPress={() => add({name, code, price})}></PressableButton>
     </Container>
   )
 }

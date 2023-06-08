@@ -1,17 +1,30 @@
 import styled from 'styled-components/native';
 
 const FlatList = styled.FlatList`
-
+  background-color: #fff;
+  border-radius: 10px;
+`;
+const Item = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom-width: 1px;
+  border-color: #ccc;
 `;
 const Product = styled.Text`
   font-size:20px;
-  padding: 10px 0;
 `;
 
 export const ListProducts = ({items}) => (
   <FlatList
     data={items}
-    renderItem={({ item }) => <Product>{item.name}</Product>}
+    renderItem={({ item }) => (
+      <Item>
+        <Product>{item.name}</Product>
+        <Product>R$ {item.price}</Product>
+      </Item>
+    )}
     keyExtractor={item => item.id}
   >
   </FlatList>
