@@ -12,8 +12,8 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Home'>
-          <Stack.Screen name="Inicio" component={Home} />
+        <Stack.Navigator initialRouteName='Vibe Natural'>
+          <Stack.Screen name="Vibe Natural" component={Home} />
           <Stack.Screen name="Produtos" component={Products} />
           <Stack.Screen name="Cadastrar produto" component={Product} />
           <Stack.Screen name="Histórico de vendas" component={Sales} />

@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.sales"
+    namespace "com.vibenatural"
     defaultConfig {
-        applicationId "com.sales"
+        applicationId "com.vibenatural"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

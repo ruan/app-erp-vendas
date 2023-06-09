@@ -1,4 +1,4 @@
-package com.sales;
+package com.vibenatural;
 
 import android.app.Application;
 import android.content.res.Configuration;

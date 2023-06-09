@@ -48,7 +48,8 @@ const Product = () => {
     );
   };
 
-  const handleBarCodeScanned = ({ data }) => {
+  const handleBarCodeScanned = ({ data, type }) => {
+    console.log(data, type)
     setShowScan(false);
     setCode(data)
   };

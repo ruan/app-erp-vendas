@@ -48,10 +48,10 @@ const Sell = () => {
   const getProductByCode= (code) => {
     database.transaction((tx) => {
       tx.executeSql(`select * from products where code == ${code}`, [], (_, { rows }) => {
-        if (!!cart.find(item => item.id === rows._array[0].id)) {
-          return
-        }
-        if (rows._array[0]) {
+        if (rows._array.length) {
+          if (!!cart.find(item => item.id === rows._array[0].id)) {
+            return
+          }
           setCurrentProduct({ ...rows._array[0] })
           setShowModal(true)
           setBarCode(null)
@@ -75,7 +75,7 @@ const Sell = () => {
 
   const handleCloseModalSuccess = () => {
     setShowModalSuccess(false)
-    navigate('Inicio')
+    navigate('Vibe Natural')
   }
 
   const onChangePaymentMethod = (value) => {
