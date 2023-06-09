@@ -8,7 +8,7 @@ import { ModalInput } from '../components/ModalInput';
 import { Input } from '../components/Input';
 import { PressableButton } from '../components/PressableButton';
 import database from '../database';
-import DropdownSelect from 'react-native-input-select';
+import { useNavigation } from '@react-navigation/core';
 
 const Sell = () => {
   const [showScan, setShowScan] = useState(false);
@@ -18,13 +18,12 @@ const Sell = () => {
   const [cart, setCart] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [paymentMethod, setPaymentMethod] = useState();
+  const { navigate } = useNavigation()
 
   const handleDoneSell = useCallback(() => {
-    console.log('compra finalizada', cart, paymentMethod)
     if (!cart.length || !paymentMethod) {
       return Alert.alert('Adicione algum produto e escolha o método de pagamento')
     }
-    console.log('compra finalizada', cart, paymentMethod)
     database.transaction((tx) => {
       tx.executeSql("insert into sales (products, payment_method) values (?, ?)", [JSON.stringify(cart), paymentMethod], () => {
         setCart([])
@@ -68,6 +67,7 @@ const Sell = () => {
 
   const handleCloseModalSuccess = () => {
     setShowModalSuccess(false)
+    navigate('Inicio')
   }
 
   const onChangePaymentMethod = (value) => {

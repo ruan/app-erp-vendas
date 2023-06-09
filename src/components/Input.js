@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
-
+import { Ionicons } from '@expo/vector-icons';
+import { useRef } from "react";
 const TextInput = styled.TextInput`
   height: 60px;
   width: 100%;
@@ -16,11 +17,14 @@ const InputTitle = styled.Text`
   margin-bottom: 10px;
 `
 
-const Input = ({ placeholder = '', value, onChangeText, keyboardType="default"}) => (
-  <>
-    <InputTitle>{placeholder}</InputTitle>
-    <TextInput keyboardType={keyboardType} value={value} onChangeText={onChangeText}></TextInput>
-  </>
-)
+const Input = ({ placeholder = '', value, onChangeText, keyboardType = "default", icon, showSoftInputOnFocus = true, ...props }) => {
+  return(
+    <>
+      <InputTitle>{placeholder}</InputTitle>
+      <TextInput keyboardType={keyboardType} showSoftInputOnFocus={showSoftInputOnFocus} value={value} onChangeText={onChangeText} {...props} ></TextInput>
+      {icon && <Ionicons style={{ alignSelf: "flex-end", top: -72, right: 15, marginBottom:-43 }} name="camera" size={40} color="green" />}
+    </>
+  )
+}
 
 export {Input}

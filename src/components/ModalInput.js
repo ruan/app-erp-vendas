@@ -13,7 +13,7 @@ const ModalContainer = styled.View`
   justify-content: center;
   align-items: center;
   margin-top: 22px;
-  background-color: red;
+  background-color: white;
 `
 
 const ModalView = styled.View`
