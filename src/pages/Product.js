@@ -42,10 +42,6 @@ const Product = () => {
           setCode(null)
           setName(null)
           setPrice(null)
-          console.log('click add', name, code, price)
-          tx.executeSql("select * from products", [], (_, { rows }) =>
-            console.log('list',JSON.stringify(rows))
-          );
         })
       },
       (error => console.log(error))
@@ -60,8 +56,6 @@ const Product = () => {
   const onPressDigitCode = useCallback(() => {
     setShowScan(false);
     setShowKeyboardInputCode(true);
-    // Keyboard.
-    // inputRef.current?.focus()
   }, [setShowScan, setShowKeyboardInputCode ])
 
   return (
