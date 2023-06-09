@@ -13,8 +13,10 @@ import { useNavigation } from '@react-navigation/core';
 const Sell = () => {
   const [showScan, setShowScan] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showModalCode, setShowModalCode] = useState(false);
   const [showModalSuccess, setShowModalSuccess] = useState(false);
   const [amount, setAmount] = useState(null);
+  const [barCode, setBarCode] = useState(null);
   const [cart, setCart] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [paymentMethod, setPaymentMethod] = useState();
@@ -40,20 +42,26 @@ const Sell = () => {
   }
   const handleBarCodeScanned = ({ data }) => {
     setShowScan(false);
+    getProductByCode(data)
+  };
+
+  const getProductByCode= (code) => {
     database.transaction((tx) => {
-      tx.executeSql(`select * from products where code == ${data}`, [], (_, { rows }) => {
-        if (!!cart.find(item => item.id === rows._array[0].id)){
+      tx.executeSql(`select * from products where code == ${code}`, [], (_, { rows }) => {
+        if (!!cart.find(item => item.id === rows._array[0].id)) {
           return
         }
         if (rows._array[0]) {
           setCurrentProduct({ ...rows._array[0] })
           setShowModal(true)
+          setBarCode(null)
+          setShowModalCode(false)
         } else {
           alert(`Código nao cadastrado`);
         }
       });
     });
-  };
+  }
 
   const handleAmountSet = useCallback(() => {
     if (amount) {
@@ -71,7 +79,6 @@ const Sell = () => {
   }
 
   const onChangePaymentMethod = (value) => {
-    console.log(value)
     setPaymentMethod(value)
   }
 
@@ -79,20 +86,32 @@ const Sell = () => {
     setCart([...cart, product])
   }, [cart,setCart])
 
+  const handlePressDigitCode = () => {
+    setShowScan(false);
+    setShowModalCode(true)
+  }
+  const handleCodeSet = useCallback(() => {
+    getProductByCode(barCode)
+  }, [barCode])
+
   return (
     <>
       <Container>
         <Cart items={cart} onAddProduct={handleAddProduct} onDoneSell={handleDoneSell} paymentMethod={paymentMethod} onChangePaymentMethod={onChangePaymentMethod}></Cart>
       </Container>
       <ModalInput visible={showModal}>
-        <Input keyboardType={'numeric'} onChangeText={(text) => { setAmount(text) }} value={amount} placeholder='Insira a quantidade'></Input>
-        <PressableButton onPress={handleAmountSet} title={'Salvar'}></PressableButton>
+        <Input keyboardType={'decimal-pad'} onChangeText={(text) => { setAmount(text) }} value={amount} placeholder='Insira a quantidade'></Input>
+        <PressableButton onPress={handleAmountSet} title={'OK'}></PressableButton>
+      </ModalInput>
+      <ModalInput visible={showModalCode}>
+        <Input keyboardType={'number-pad'} onChangeText={(text) => { setBarCode(text) }} value={barCode} placeholder='Insira o código do produto'></Input>
+        <PressableButton onPress={handleCodeSet} title={'OK'}></PressableButton>
       </ModalInput>
       <ModalInput visible={showModalSuccess}>
         <Title>Compra Finalizada com sucesso!</Title>
-        <PressableButton onPress={handleCloseModalSuccess} title={'Ok'}></PressableButton>
+        <PressableButton onPress={handleCloseModalSuccess} title={'OK'}></PressableButton>
       </ModalInput>
-      {showScan && <BarcodeScanner handleBarCodeScanned={handleBarCodeScanned}></BarcodeScanner> }
+      {showScan && <BarcodeScanner onPressDigitCode={handlePressDigitCode} handleBarCodeScanned={handleBarCodeScanned}></BarcodeScanner> }
     </>
   )
 }
