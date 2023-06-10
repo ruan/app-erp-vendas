@@ -34,10 +34,11 @@ const Footer = (value) => (
   </Item>
 )
 
-const calcValue = (items) => items.reduce((prevItem, currentValue) => prevItem + currentValue.amount * currentValue.price, 0)
+const calcValue = (items) => items.reduce((prevItem, currentValue) => prevItem + currentValue.value, 0)
 
 
 export const Cart = ({ items, onAddProduct, onDoneSell, onChangePaymentMethod, paymentMethod }) => {
+  console.log(items)
   const totalPrice = calcValue(items).toFixed(2)
 
   return (
@@ -49,10 +50,10 @@ export const Cart = ({ items, onAddProduct, onDoneSell, onChangePaymentMethod, p
       renderItem={({ item }) => (
         <Item>
           <Text>{item.name}</Text>
-          <Text>{item.amount}</Text>
+          <Text>{item.amount} {item.measurement}</Text>
         </Item>
       )}
-      keyExtractor={item => item.id}
+        keyExtractor={(item,index) => index }
     >
     </FlatList>
     <DropdownSelect

@@ -9,6 +9,7 @@ import { Input } from '../components/Input';
 import { PressableButton } from '../components/PressableButton';
 import database from '../database';
 import { useNavigation } from '@react-navigation/core';
+import { getCodeFromBarCode, getCodeFromText, getProductInfoFromBarCode, getProductValueFromAmount, getValueFromBarCode } from '../common/utils';
 
 const Sell = () => {
   const [showScan, setShowScan] = useState(false);
@@ -45,15 +46,23 @@ const Sell = () => {
     getProductByCode(data)
   };
 
-  const getProductByCode= (code) => {
+  const getProductByCode= (barCode) => {
+    const productCode = getCodeFromBarCode(barCode)
     database.transaction((tx) => {
-      tx.executeSql(`select * from products where code == ${code}`, [], (_, { rows }) => {
+      tx.executeSql(`select * from products where code == ${productCode}`, [], (_, { rows }) => {
         if (rows._array.length) {
-          if (!!cart.find(item => item.id === rows._array[0].id)) {
-            return
+          const product = {...rows._array[0]}
+          if (barCode){
+            const { value, amount } = getProductInfoFromBarCode(barCode, product)
+            product.value = value
+            product.amount = amount
           }
-          setCurrentProduct({ ...rows._array[0] })
-          setShowModal(true)
+          if (!product.value || !product.amount) {
+            setShowModal(true)
+          } else {
+            addItemCart(product)
+          }
+          setCurrentProduct(product)
           setBarCode(null)
           setShowModalCode(false)
         } else {
@@ -65,7 +74,8 @@ const Sell = () => {
 
   const handleAmountSet = useCallback(() => {
     if (amount) {
-      const currProduct = { ...currentProduct, amount }
+      const product = getProductValueFromAmount(amount, {...currentProduct})
+      const currProduct = { ...currentProduct, ...product }
       setCurrentProduct(null)
       setShowModal(false)
       setAmount(null)

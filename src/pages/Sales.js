@@ -10,7 +10,7 @@ const Sales = () => {
   const getSales = () => {
     database.transaction((tx) => {
       tx.executeSql(`select * from sales`, [], (_, { rows }) => {
-        console.log('list', rows._array.map(sell => ({ ...sell, products: JSON.parse(sell.products) })))
+        console.log('list', JSON.stringify(rows._array.map(sell => ({ ...sell, products: JSON.parse(sell.products) }))))
         setSales(rows._array.map(sell => ({ ...sell, products: JSON.parse(sell.products)})))
       });
 
