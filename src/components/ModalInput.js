@@ -1,8 +1,5 @@
 import styled from 'styled-components/native';
 import { Modal } from 'react-native';
-import { Input } from './Input';
-import { PressableButton } from './PressableButton';
-import { useState } from 'react';
 
 const Title = styled.Text`
   font-size:20px;

@@ -5,7 +5,6 @@ const FlatList = styled.FlatList`
   border-radius: 10px;
 `;
 const Item = styled.View`
-  flex: 1;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;

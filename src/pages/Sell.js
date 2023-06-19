@@ -10,6 +10,7 @@ import { PressableButton } from '../components/PressableButton';
 import database from '../database';
 import { useNavigation } from '@react-navigation/core';
 import { getCodeFromBarCode, getCodeFromText, getProductInfoFromBarCode, getProductValueFromAmount, getValueFromBarCode } from '../common/utils';
+import { Scroll } from '../components/Scroll';
 
 const Sell = () => {
   const [showScan, setShowScan] = useState(false);

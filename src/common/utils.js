@@ -1,5 +1,8 @@
 export const getCodeFromBarCode = (barCode, type) => {
-  const code = barCode.slice(1,7)
+  const code = barCode
+  if (barCode.length === 13) {
+    code = barCode.slice(1,7)
+  }
   return code
 }
 export const getProductInfoFromBarCode = (barCode, product) => {
