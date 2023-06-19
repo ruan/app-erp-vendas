@@ -4,7 +4,7 @@ const FlatList = styled.FlatList`
   background-color: #fff;
   border-radius: 10px;
 `;
-const Item = styled.View`
+const Item = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
@@ -15,11 +15,11 @@ const Product = styled.Text`
   font-size:20px;
 `;
 
-export const ListProducts = ({items}) => (
+export const ListProducts = ({items, onPressItem}) => (
   <FlatList
     data={items}
     renderItem={({ item }) => (
-      <Item>
+      <Item onPress={() => onPressItem(item)}>
         <Product>{item.name}</Product>
         <Product>R$ {item.price}</Product>
       </Item>

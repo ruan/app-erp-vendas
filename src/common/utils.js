@@ -1,7 +1,11 @@
 export const getCodeFromBarCode = (barCode, type) => {
-  const code = barCode
+  let code = barCode
   if (barCode.length === 13) {
-    code = barCode.slice(1,7)
+    if(barCode.slice(0,1) === '2') {
+      code = barCode.slice(1,7)
+    } else {
+      code = barCode.slice(-6, barCode.length)
+    }
   }
   return code
 }
@@ -12,11 +16,9 @@ export const getProductInfoFromBarCode = (barCode, product) => {
     value = +(barCode.slice(8,13)*.001).toFixed(2);
     amount = (value/product.price).toFixed(3);
   }
-  console.log('getProductInfoFromBarCode', value, amount)
   return { value, amount }
 }
 export const getProductValueFromAmount = (amount, product) => {
-  console.log('getProductValueFromAmount', amount, product)
   const convertedAmount = +amount.replace(",", ".")
   const value = convertedAmount * product.price;
 
@@ -24,9 +26,9 @@ export const getProductValueFromAmount = (amount, product) => {
 }
 
 export const getCodeFromText = (code) => {
-  if(code.length === 6) {
-    return code
+  if (code.length > 6) {
+    throw 'Código inválido'
   } else {
-    return `${code}00`
+    return `${code * (10 ** (6 - code.length))}`
   }
 }

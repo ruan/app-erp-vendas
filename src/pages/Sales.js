@@ -9,8 +9,7 @@ const Sales = () => {
 
   const getSales = () => {
     database.transaction((tx) => {
-      tx.executeSql(`select * from sales`, [], (_, { rows }) => {
-        console.log('list', JSON.stringify(rows._array.map(sell => ({ ...sell, products: JSON.parse(sell.products) }))))
+      tx.executeSql(`select * from sales order by create_at desc`, [], (_, { rows }) => {
         setSales(rows._array.map(sell => ({ ...sell, products: JSON.parse(sell.products)})))
       });
 
