@@ -9,8 +9,7 @@ import { Input } from '../components/Input';
 import { PressableButton } from '../components/PressableButton';
 import database from '../database';
 import { useNavigation } from '@react-navigation/core';
-import { getCodeFromBarCode, getCodeFromText, getProductInfoFromBarCode, getProductValueFromAmount, getValueFromBarCode } from '../common/utils';
-import { Scroll } from '../components/Scroll';
+import { getCodeFromBarCode, getProductInfoFromBarCode, getProductValueFromAmount } from '../common/utils';
 
 const Sell = () => {
   const [showScan, setShowScan] = useState(false);

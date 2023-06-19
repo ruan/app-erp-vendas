@@ -5,6 +5,7 @@ const FlatList = styled.FlatList`
   border-radius: 10px;
 `;
 const Item = styled.TouchableOpacity`
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
@@ -12,10 +13,12 @@ const Item = styled.TouchableOpacity`
   border-color: #ccc;
 `;
 const Product = styled.Text`
+  vertical-align: middle;
+  max-width:70%;
   font-size:20px;
 `;
 
-export const ListProducts = ({items, onPressItem}) => (
+export const ListProducts = ({ items, onPressItem }) => (
   <FlatList
     data={items}
     renderItem={({ item }) => (

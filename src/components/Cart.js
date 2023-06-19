@@ -8,14 +8,16 @@ const FlatList = styled.FlatList`
 `;
 const Item = styled.View`
   padding: 20px;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
   background-color: #fff;
   border-bottom-width:1px;
   border-bottom-color: #dadada;
 `;
-
 const Text = styled.Text`
+  vertical-align: middle;
+  max-width:70%;
   font-size:20px;
 `;
 
